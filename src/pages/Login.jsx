@@ -14,7 +14,7 @@ export default function Login() {
 
        const handleSubmit= async(e)=>{
         e.preventDefault();
-          console.log(email,password)
+         console.log("data")
           try {
               const request= await post('/api/auth/login',{email,password})
               const reponse= request.data 
@@ -25,6 +25,7 @@ export default function Login() {
                 }else if (reponse.user.role =='user') {
                    navigate('/')
                 }
+                localStorage.setItem('token', reponse.token);
                 toast.success(reponse.message)
                 dispatch(SetUser(reponse.user))
               }
